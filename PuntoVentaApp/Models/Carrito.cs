@@ -1,8 +1,13 @@
 namespace PuntoVentaApp.Models;
 
-public class ErrorViewModel
+public class Carrito
 {
-    public string? RequestId { get; set; }
+    public Producto? Producto { get; set; }
+    public int? Cantidad { get; set; }
+    public float? Total { get; set; }
 
-    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+    public void AgregarProducto() {}
+    public void CrearPedido() {}
+    public void EliminarProducto() {}
+    public void Eliminarcarrito() {}
 }
