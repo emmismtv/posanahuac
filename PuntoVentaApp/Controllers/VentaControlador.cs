@@ -53,7 +53,7 @@ public class VentaControlador: Controller
             string path = "ReporteVenta.txt";
             using (StreamWriter writer = new StreamWriter(path, true))
             {
-                writer.WriteLine("Ticket de Venta H&M México");
+                writer.WriteLine("Ticket de Venta H&M México S.A. de C.V.");
                 writer.WriteLine("----------------------------");
                 foreach (var producto in carrito)
                 {
