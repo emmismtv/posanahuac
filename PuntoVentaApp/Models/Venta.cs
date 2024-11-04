@@ -35,4 +35,8 @@ public class Venta
     {
     }
 
+    public void CrearReporte()
+    {
+    }
+
 }
