@@ -1,19 +1,19 @@
 namespace PuntoVentaApp.Models;
 
-public class Pedido
+public class Venta
 {
-    public Producto? Producto { get; set; }
+    public Producto? Productos { get; set; }
     public int? ID { get; set; }
     public float? Total { get; set; }
     public float? Descuento { get; set; }
-    public Cliente? Cliente { get; set; }
+    public Usuario? Cliente { get; set; }
     public DateTime? Fecha { get; set; }
     public string? Status { get; set; }
     public string? FormaPago { get; set; }
 
-    public Pedido(Producto producto, int id, float total, float descuento, Cliente cliente, DateTime fecha, string status, string formaPago)
+    public Venta(Producto productos, int id, float total, float descuento, Usuario cliente, DateTime fecha, string status, string formaPago)
     {
-        Producto = producto;
+        Productos = productos;
         ID = id;
         Total = total;
         Descuento = descuento;
@@ -23,15 +23,15 @@ public class Pedido
         FormaPago = formaPago;
     }
 
-    public void CrearPedido()
+    public void CrearVenta()
     {
     }
 
-    public void EliminarPedido()
+    public void EliminarVenta()
     {
     }
 
-    public void ModificarPedido()
+    public void ModificarVenta()
     {
     }
 
