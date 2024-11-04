@@ -14,16 +14,10 @@ public class Categoria
         Nombre = nombre;
     }
 
-    public void AgregarCategoria()
-    {
-    }
+    public void AgregarCategoria() {}
 
-    public void EliminarCategoria()
-    {
-    }
+    public void EliminarCategoria() {}
 
-    public void ModificarCategoria()
-    {
-    }
+    public void ModificarCategoria() {}
 
 }

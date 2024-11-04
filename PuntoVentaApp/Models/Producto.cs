@@ -17,12 +17,8 @@ public class Producto
         ID = id;
     }
 
-    public void AgregarProducto()
-    {
-    }
+    public void AgregarProducto() {}
 
-    public void EliminarProducto()
-    {
-    }
+    public void EliminarProducto() {}
 
 }

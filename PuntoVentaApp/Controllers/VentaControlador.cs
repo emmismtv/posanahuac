@@ -30,7 +30,6 @@ public class VentaControlador: Controller
         carrito.Add(producto3);
 
         }
-
         public void CrearPedido()
         {
             Console.WriteLine("\nResumen de la Venta:");
@@ -54,13 +53,13 @@ public class VentaControlador: Controller
             string path = "ReporteVenta.txt";
             using (StreamWriter writer = new StreamWriter(path, true))
             {
-                writer.WriteLine("Ticket de Venta");
+                writer.WriteLine("Ticket de Venta H&M México");
                 writer.WriteLine("----------------------------");
                 foreach (var producto in carrito)
                 {
                     writer.WriteLine($"{producto.Nombre} - Cantidad: {producto.Cantidad}, Subtotal: {producto.Precio * producto.Cantidad:C}");
                 }
-                writer.WriteLine($"Total a Pagar: ${total}");
+                writer.WriteLine($"Total Pagado: ${total}");
                 writer.WriteLine($"Fecha de Venta: {DateTime.Now}");
                 writer.WriteLine("----------------------------\n");
             }
