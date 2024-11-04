@@ -19,7 +19,7 @@ namespace PuntoVentaApp.Controllers
         {
             try
             {
-                // Aquí puedes agregar lógica adicional si es necesario
+                Console.WriteLine("Hello, World!");
                 return View();
             }
             catch (Exception ex)
