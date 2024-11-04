@@ -1,8 +1,8 @@
-namespace PuntoVentaApp.Models
+namespace PuntoVentaApp.Models;
 
 public class Inventario
 {
-    public Producto Productos { get; set; }
+    public Producto? Productos { get; set; }
 
     public Inventario(Producto productos)
     {

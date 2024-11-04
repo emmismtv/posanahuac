@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PuntoVentaApp.Models;
 
-namespace PuntoVentaApp.Controladores;
+namespace PuntoVentaApp.Controllers {
 
 public class VentaControlador: Controller
 {
@@ -28,7 +28,6 @@ public class VentaControlador: Controller
         carrito.Add(producto1);
         carrito.Add(producto2);
         carrito.Add(producto3);
-
         }
         public void CrearPedido()
         {
@@ -37,7 +36,7 @@ public class VentaControlador: Controller
             foreach (var producto in carrito)
             {
                 Console.WriteLine($"{producto.Nombre} - Cantidad: {producto.Cantidad}, Subtotal: ${producto.Precio * producto.Cantidad}");
-                total = total + (producto.Precio * producto.Cantidad);
+                total = (producto.Precio * producto.Cantidad) + total;
             }
             Console.WriteLine($"Total a Pagar: ${total}");
             Console.WriteLine("----------------------------");

@@ -1,16 +1,14 @@
-namespace PuntoVentaApp.Models
+namespace PuntoVentaApp.Models;
 public class Usuario
 {
     public int? ID  { get; set; }
     public string? Nombre  { get; set; }
     public string? Correo  { get; set; }
-
-    public Usuario 
     public Usuario(string nombre, int id, string correo)
     {
         Nombre = nombre;
-        Correo = correo;
         ID = id;
+        Correo = correo;
     }
     
     public void HistorialCompras() {}

@@ -8,18 +8,17 @@ namespace PuntoVentaApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        // Constructor que inyecta el servicio de logger
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        // Acción principal que devuelve la vista de inicio
         public IActionResult Index()
         {
             try
             {
-                Console.WriteLine("Hello, World!");
+                var ventaControlador = new VentaControlador();
+                ventaControlador.CrearPedido();
                 return View();
             }
             catch (Exception ex)
@@ -29,7 +28,6 @@ namespace PuntoVentaApp.Controllers
             }
         }
 
-        // Acción que devuelve la vista de privacidad
         public IActionResult Privacy()
         {
             try
@@ -43,32 +41,24 @@ namespace PuntoVentaApp.Controllers
             }
         }
 
-        // Acción que maneja errores y muestra una vista de error
+        public IActionResult Venta()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ocurrió un error al cargar la página de venta.");
+                return RedirectToAction("Error");
+            }
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             var errorViewModel = new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
             return View(errorViewModel);
-        }
-
-        // Ejemplo de una nueva acción para mostrar detalles de un producto
-        public IActionResult ProductDetails(int id)
-        {
-            try
-            {
-                // Lógica para obtener detalles de un producto por ID
-                // var product = _productService.GetProductById(id); // Llama al servicio correspondiente
-                // if (product == null) return NotFound();
-
-                // return View(product);
-
-                return View(); // Placeholder, sustituir con lógica real
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error al cargar los detalles del producto con ID: {Id}", id);
-                return RedirectToAction("Error");
-            }
         }
     }
 }
