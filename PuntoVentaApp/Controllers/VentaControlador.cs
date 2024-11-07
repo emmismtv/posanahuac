@@ -28,6 +28,9 @@ public class VentaControlador: Controller
         carrito.Add(producto1);
         carrito.Add(producto2);
         carrito.Add(producto3);
+
+        CrearPedido();
+
         }
         public void CrearPedido()
         {

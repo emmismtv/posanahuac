@@ -17,8 +17,6 @@ namespace PuntoVentaApp.Controllers
         {
             try
             {
-                var ventaControlador = new VentaControlador();
-                ventaControlador.CrearPedido();
                 return View();
             }
             catch (Exception ex)
