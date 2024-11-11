@@ -11,18 +11,6 @@ public class Venta
     public string? Status { get; set; }
     public string? FormaPago { get; set; }
 
-    public Venta(Producto productos, int id, float total, float descuento, Usuario cliente, DateTime fecha, string status, string formaPago)
-    {
-        Productos = productos;
-        ID = id;
-        Total = total;
-        Descuento = descuento;
-        Cliente = cliente;
-        Fecha = fecha;
-        Status = status;
-        FormaPago = formaPago;
-    }
-
     public void CrearVenta()
     {
     }
@@ -37,6 +25,21 @@ public class Venta
 
     public void CrearReporte()
     {
+        Carrito carrito = new Carrito();
+         string path = "ReporteVenta.txt";
+            using (StreamWriter writer = new StreamWriter(path, true))
+            {
+                writer.WriteLine("Ticket de Venta H&M México S.A. de C.V.");
+                writer.WriteLine("----------------------------");
+                foreach (var producto in carrito.ListaCarrito)
+                {
+                    writer.WriteLine($"{producto.producto.Nombre} - Cantidad: {producto.cantidad}, Subtotal: {producto.producto.Precio * producto.cantidad:C}");
+                }
+                writer.WriteLine($"Total Pagado: ${carrito.Total}");
+                writer.WriteLine($"Fecha de Venta: {DateTime.Now}");
+                writer.WriteLine("----------------------------\n");
+            }
+            Console.WriteLine("Reporte de venta generado exitosamente.");
     }
 
 }

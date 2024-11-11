@@ -4,9 +4,10 @@
 <h1>@ViewData["Venta"]</h1>
 
 <h1><span style="color:#212121;">Venta</span></h1>
-<p><span style="color:#212121;">Haz tap en el siguiente botón para generar una venta. El ticket se descargará de forma automática.</span></p>
+<p><span style="color:#212121;">Haz tap en el siguiente botón para generar una venta. El ticket se descargará de forma
+        automática.</span></p>
 <h1 class="display-4">&nbsp;</h1>
 
-<form asp-action="AgregarProductos" asp-controller="VentaControlador" method="post">
+<form asp-action="CrearCarrito" asp-controller="VentaControlador" method="post">
     <button type="submit" class="btn btn-primary">Procesar Venta</button>
 </form>
