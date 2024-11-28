@@ -18,8 +18,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/emmis/Downloads/posanahuac/posanahuac/PuntoVentaApp
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/emmis/Downloads/posanahuac/posanahuac/PuntoVentaApp/Views/Home/CrearProductos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9DcmVhclByb2R1Y3Rvcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/emmis/Downloads/posanahuac/posanahuac/PuntoVentaApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/emmis/Downloads/posanahuac/posanahuac/PuntoVentaApp/Views/Home/MostrarProductos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Nb3N0cmFyUHJvZHVjdG9zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/emmis/Downloads/posanahuac/posanahuac/PuntoVentaApp/Views/Home/Privacy.cshtml]

@@ -39,19 +39,6 @@ namespace PuntoVentaApp.Controllers
             }
         }
 
-        public IActionResult Venta()
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Ocurrió un error al cargar la página de venta.");
-                return RedirectToAction("Error");
-            }
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

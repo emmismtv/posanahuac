@@ -1,45 +1,57 @@
 namespace PuntoVentaApp.Models;
-
 public class Carrito
 {
-    public Producto? Producto { get; set; }
-    public int? Cantidad { get; set; }
-    public float? Total { get; set; }
-    public List<(Producto producto, int cantidad)> ListaCarrito { get; set; } = new List<(Producto, int)>();
+    private static List<Carrito> listaCarrito = new List<Carrito>();
+    public int SKU { get; set; }
+    public string Nombre { get; set; }
+    public float Precio { get; set; }
+    public int Cantidad { get; set; }
 
-    public void AgregarProducto(Producto producto, int cantidad)
+    public static void AgregarProducto(Carrito item)
     {
-        Producto = producto;
-        Cantidad = cantidad;
-        ListaCarrito.Add((producto, cantidad));
-    }
-    public void CrearPedido()
-    {
-        Venta venta = new Venta();
-        Total = 0;
-        Console.WriteLine("\nResumen de la Venta:");
-        Console.WriteLine("----------------------------");
-        foreach (var producto in ListaCarrito)
+        var productoExistente = listaCarrito.FirstOrDefault(p => p.SKU == item.SKU);
+        if (productoExistente != null)
         {
-            Console.WriteLine($"{producto.producto.Nombre} - Cantidad: {producto.cantidad}, Subtotal: ${producto.producto.Precio * producto.cantidad}");
-            Total = (producto.producto.Precio * producto.cantidad) + Total;
+            productoExistente.Cantidad += item.Cantidad;
         }
-        Console.WriteLine($"Total a Pagar: ${Total}");
-        Console.WriteLine("----------------------------");
-
-        ListaCarrito.Clear();
-        Total = 0;
-        venta.CrearReporte();
-
+        else
+        {
+            listaCarrito.Add(item);
+        }
     }
-    public void EliminarProducto(Producto producto, int cantidad)
+
+    public static void EliminarProducto(int sku)
     {
-        Producto = producto;
-        Cantidad = cantidad;
-        ListaCarrito.Remove((producto, cantidad));
+        var producto = listaCarrito.FirstOrDefault(p => p.SKU == sku);
+        if (producto != null)
+        {
+            listaCarrito.Remove(producto);
+            
+        }
     }
-    public void EliminarCarrito()
+
+    public static List<Carrito> ObtenerCarrito()
     {
-        ListaCarrito.Clear();
+        return listaCarrito;
+    }
+
+    public static void VaciarCarrito() 
+    {
+        listaCarrito.Clear();
+    }
+
+    public static float CalcularSubtotal()
+    {
+        return listaCarrito.Sum(item => item.Precio * item.Cantidad);
+    }
+
+    public static float CalcularIVA()
+    {
+        return CalcularSubtotal() * 0.16f;
+    }
+
+    public static float CalcularTotal()
+    {
+        return CalcularSubtotal();
     }
 }

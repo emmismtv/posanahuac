@@ -1,13 +1,112 @@
+@model List<PuntoVentaApp.Models.Producto>
+
 @{
-    ViewData["Title"] = "Venta";
+    ViewData["Title"] = "Crear Venta";
 }
-<h1>@ViewData["Venta"]</h1>
 
-<h1><span style="color:#212121;">Venta</span></h1>
-<p><span style="color:#212121;">Haz tap en el siguiente botón para generar una venta. El ticket se descargará de forma
-        automática.</span></p>
-<h1 class="display-4">&nbsp;</h1>
+<div class="pb-4">
+    <h2>Carrito de Compras</h2>
+</div>
 
-<form asp-action="CrearCarrito" asp-controller="VentaControlador" method="post">
-    <button type="submit" class="btn btn-primary">Procesar Venta</button>
-</form>
+<!-- Mensaje de éxito o error -->
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    @TempData["Mensaje"]
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
+<h3>Productos Disponibles</h3>
+@if (Model == null || !Model.Any())
+{
+    <p>No hay productos disponibles en este momento.</p>
+}
+else
+{
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var producto in Model)
+        {
+            @if (producto.Disponible == true)
+            {
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@producto.Nombre</h5>
+                        <p class="card-text">
+                            <strong>Precio:</strong> $@producto.Precio:<br />
+                            <strong>Cantidad Disponible:</strong> @producto.Cantidad
+                        </p>
+                        <form asp-action="AgregarAlCarrito" asp-controller="Venta" method="post">
+                            <input type="hidden" name="sku" value="@producto.SKU" />
+                            <input type="number" name="cantidad" class="form-control mb-2" min="1" max="@producto.Cantidad"
+                                value="1" />
+                            <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            }
+        }
+    </div>
+}
+
+<h3 class="mt-5">Carrito</h3>
+@if (ViewBag.Carrito == null || !((List<Carrito>)ViewBag.Carrito).Any())
+{
+    <p>No hay productos en el carrito.</p>
+}
+else
+{
+    <table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var productoCarrito in ViewBag.Carrito)
+            {
+                <tr>
+                    <td>@productoCarrito.Nombre</td>
+                    <td>$@productoCarrito.Precio</td>
+                    <td>@productoCarrito.Cantidad</td>
+                    <td>$@(productoCarrito.Precio * productoCarrito.Cantidad)</td>
+                    <td>
+                        <form asp-action="EliminarDelCarrito" asp-controller="Venta" method="post" style="display:inline;">
+                            <input type="hidden" name="cantidad" value="@productoCarrito.Cantidad" />
+                            <input type="hidden" name="sku" value="@productoCarrito.SKU" />
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="mt-4">
+    <p><strong>Subtotal:</strong> $@ViewBag.Subtotal</p>
+    <p><strong>IVA (16%):</strong> $@ViewBag.IVA</p>
+    <p><strong>Total:</strong> $@ViewBag.Total</p>
+
+    <div class="text-center mt-4">
+        <form id="descargarReporte" asp-action="CrearReporte" asp-controller="Venta" method="post">
+            <button type="submit" class="btn btn-primary btn-lg">Crear Venta</button>
+        </form>
+    </div>
+
+    <script>
+    document.getElementById("descargarReporte").addEventListener("submit", function (event) {
+        // Espera un poco para asegurar que la descarga comience
+        setTimeout(() => {
+            window.location.href = '/Venta/EliminarCarritoReporte';
+        }, 1000); // Ajusta el tiempo según sea necesario
+    });
+</script>
+
+</div>
+}

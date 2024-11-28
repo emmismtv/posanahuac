@@ -1,0 +1,47 @@
+@model List<PuntoVentaApp.Models.Producto>
+
+@{
+    ViewData["Title"] = "Productos Disponibles";
+}
+
+<h2 class="mb-4">Productos Disponibles</h2>
+
+<!-- Mostrar alerta si hay un mensaje -->
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Mensaje"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (Model == null || !Model.Any())
+{
+    <p>No hay productos disponibles en este momento.</p>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var producto in Model)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@producto.Nombre</h5>
+                        <p class="card-text">
+                            <strong>Precio:</strong> $@producto.Precio<br />
+                            <strong>Cantidad:</strong> @producto.Cantidad<br />
+                        </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <small class="text-muted">Disponible: @(producto.Disponible == true ? "Sí" : "No")</small>
+                        <form asp-action="Eliminar" asp-controller="MostrarProductos" method="post">
+                            <input type="hidden" name="sku" value="@producto.SKU" />
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
